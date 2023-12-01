@@ -1,0 +1,65 @@
+{% extends "base_layout.html" %}
+{% block content %}
+<div class="row" style="height: 74px"></div>
+<div class="container-fluid">
+    <div id="ui-view" data-select2-id="ui-view">
+        <div>
+            <div class="card">
+                <div class="card-header">Số hóa đơn: 
+                    <strong>{{ checkout.order_id }}</strong>
+                </div>
+                <div class="card-header">Tên người mua:
+                    <strong>{{user.first_name}} {{user.last_name}}</strong>
+                <div class="card-body p-5 ">
+                    <div class="table-responsive-sm">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Tên Khoá Học</th>
+                                    <th class="center">Huấn Luyện Viên</th>
+                                    <th class="right">Lịch Tập Luyện</th>
+                                    <th class="right">Ngày Tạo</th>
+                                    <th class="right">Số Tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for course_info in course_info_list %}
+                                <tr>
+                                    <td>{{ course_info.name }}</td>
+                                    <td class="center">{{ course_info.trainer }}</td>
+                                    <td class="left">{{ course_info.time_course }} {{ course_info.schedule_course }}</td>
+                                    <td class="center">{{ checkout.created_date }}</td>
+                                    <td class="center">{{ course_info.tuition_course }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-5 ml-auto">
+                            <table class="table table-clear">
+                                <tbody>
+                                    <tr>
+                                        <td class="left">
+                                            <strong>Tổng Cộng</strong>
+                                        </td>
+                                        <td class="right">
+                                            <strong>{{ checkout.checkout_Amount }}</strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a class="btn btn-sm btn-secondary float-right mr-1 d-print-none" href="#" onclick="javascript:window.print();" data-abc="true">
+                            <i class="fa fa-print"></i> In hoá đơn
+                            </a>
+                            <a class="btn btn-sm btn-success float-right mr-1 d-print-none" href="{% url "course_purchased" %}">
+                                &#x2190; Quay lại
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

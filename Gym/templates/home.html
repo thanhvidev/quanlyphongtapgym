@@ -1,0 +1,1110 @@
+{% extends 'base.html' %} {% load static %}{% load bootstrap4 %}
+{% block main-content %}
+    <a id="bgndVideo" class="player" src="{% static "images/img_4.jpg" %}"
+      data-property="containment:'#home-section'">
+    </a>
+    <div class="intro-section" id="home-section" style="background-color: #ccc;">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-12 mx-auto text-center" data-aos="fade-up">
+            <h1 class="mb-3">PHÒNG TẬP GYM</h1>
+            <p class="lead mx-auto desc mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores nisi minus perspiciatis optio, id deserunt.</p>
+            <p class="text-center">
+              <a href="{% url "register" %}" class="btn btn-outline-white py-3 px-5">Đăng ký tập</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- CÁC KHOÁ HỌC -->
+  <div class="site-section" id="classes-section">
+    <div class="container">
+      <div class="row justify-content-center text-center mb-5">
+        <div class="col-md-8  section-heading">
+          <span class="subheading">Lớp học</span>
+          <h2 class="heading mb-3">TẤT CẢ KHOÁ HỌC</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis consequatur cum neque?
+          Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+        </div>
+      </div>
+      <div class="row">
+        {% for course in courses %}
+          {% if forloop.counter <= 8 %}
+            <div class="col-lg-6">
+              <div class="class-item d-flex align-items-center {% if course.quantity_member == 0 %}disabled{% endif %}">
+                <a href="{% url 'course_detail' category_slug=course.category.slug course_slug=course.slug %}" class="class-item-thumbnail">
+                  <img src="{{ course.ImageURL }}" alt="{{ course.name }}" style="width: 100px; height: 100px; object-fit: cover;">
+                </a>
+                <div class="class-item-text">
+                  <h2><a href="{% url 'course_detail' category_slug=course.category.slug course_slug=course.slug %}">{{ course.name }}</a></h2>
+                  <span>Thời gian học: {{ course.time_course }} {{ course.get_schedule_display }}</span>
+                  <p>Học Phí: {{ course.tuition_course | floatformat:0}} VNĐ </p>
+                  {% if course.quantity_member == 0  %}
+                  <span>Số lượng học viên: Đã đủ </span>
+                  {% else %}
+                  <span>Số lượng học viên: {{ course.quantity_member }} </span>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% empty %}
+          <p>Không có sản phẩm nào.</p>
+        {% endfor %}
+      </div>      
+    </div>
+  </div>
+
+    <div class="bgimg" style="background-image: url('{% static "images/bg_3.jpg" %}');"  data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="row align-items-center justify-content-center text-center">
+          <div class="col-md-7">
+            <h2 class="">CÁC BƯỚC LUYỆN TẬP</h2>
+            <p class="lead mx-auto desc mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit ipsam tempore, sapiente modi facilis est?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section" id="schedule-section">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-md-8  section-heading">
+            <span class="subheading">Lịch tập thể dục</span>
+            <h2 class="heading mb-3">LỊCH TRÌNH</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
+              texts.
+              Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <ul class="nav days d-flex" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="sunday-tab" data-toggle="tab" href="#nav-sunday" role="tab" aria-controls="sunday"
+                  aria-selected="true">Thứ 2</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="monday-tab" data-toggle="tab" href="#nav-monday" role="tab" aria-controls="monday"
+                  aria-selected="false">Thứ 3</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="tuesday-tab" data-toggle="tab" href="#nav-tuesday" role="tab" aria-controls="tuesday"
+                  aria-selected="false">Thứ 4</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="wednesday-tab" data-toggle="tab" href="#nav-wednesday" role="tab" aria-controls="wednesday"
+                  aria-selected="false">Thứ 5</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" id="thursday-tab" data-toggle="tab" href="#nav-thursday" role="tab" aria-controls="thursday"
+                  aria-selected="false">Thứ 6</a>
+              </li><li class="nav-item">
+                <a class="nav-link" id="friday-tab" data-toggle="tab" href="#nav-friday" role="tab" aria-controls="friday"
+                  aria-selected="false">Thứ 7</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="saturday-tab" data-toggle="tab" href="#nav-saturday" role="tab" aria-controls="saturday"
+                  aria-selected="false">Chủ Nhật</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {% comment %} <div class="tab-content">
+          <div class="tab-pane fade show active" id="nav-sunday" role="tabpanel" aria-labelledby="nav-sunday-tab">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="class-item d-flex align-items-center">
+                  {% for course in courses_thu2 %}
+                  <a href="{% url 'course_detail' category_slug=course.category.slug course_slug=course.slug %}" class="class-item-thumbnail">
+                    <img src="{{course.ImageURL}}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>{{course.get_time_display}}</span>
+                    <h2><a href="{% url 'course_detail' category_slug=course.category.slug course_slug=course.slug %}">{{course.name}}</a></h2>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-monday" role="tabpanel" aria-labelledby="nav-monday-tab">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_4.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Monday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #4</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Monday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #1</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_2.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Monday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #2</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_3.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Monday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #3</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Monday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #5</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+          
+              </div>
+              <div class="col-lg-6">
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Monday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #1</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_2.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Monday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #2</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_3.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Monday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #3</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_4.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Monday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #4</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Monday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #5</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-tuesday" role="tabpanel" aria-labelledby="nav-tuesday-tab">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_2.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Tuesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #2</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Tuesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #1</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_3.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Tuesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #3</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_4.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Tuesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #4</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Tuesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #5</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-lg-6">
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_3.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Tuesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #3</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Tuesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #1</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_2.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Tuesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #2</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_4.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Tuesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #4</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Tuesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #5</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-wednesday" role="tabpanel" aria-labelledby="nav-wednesday-tab">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_2.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Wednesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #2</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Wednesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #1</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_3.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Wednesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #3</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_4.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Wednesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #4</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Wednesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #5</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-lg-6">
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_3.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Wednesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #3</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Wednesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #1</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_2.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Wednesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #2</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_4.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Wednesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #4</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Wednesday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #5</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="nav-thursday" role="tabpanel" aria-labelledby="nav-thursday-tab">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_4.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Thursday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #4</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Thursday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #1</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_2.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Thursday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #2</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_3.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Thursday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #3</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Thursday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #5</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+          
+              </div>
+              <div class="col-lg-6">
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Thursday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #1</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_2.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Thursday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #2</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_3.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Thursday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #3</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_4.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Thursday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #4</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Thursday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #5</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-friday" role="tabpanel" aria-labelledby="nav-friday-tab">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_2.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Friday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #2</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Friday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #1</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_3.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Friday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #3</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_4.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Friday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #4</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Friday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #5</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+    
+              </div>
+              <div class="col-lg-6">
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_3.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Friday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #3</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Friday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #1</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_2.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Friday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #2</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_4.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Friday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #4</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Friday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #5</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-saturday" role="tabpanel" aria-labelledby="nav-saturday-tab">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Saturday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #1</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_2.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Saturday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #2</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_3.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Saturday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #3</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_4.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Saturday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #4</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Saturday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #5</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+   
+              </div>
+              <div class="col-lg-6">
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_3.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Saturday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #3</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Saturday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #1</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_2.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Saturday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #2</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div> 
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_4.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Saturday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #4</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+          
+                <div class="class-item d-flex align-items-center">
+                  <a href="{% url 'course' %}" class="class-item-thumbnail">
+                    <img src="{% static "images/img_1.jpg" %}" alt="Image">
+                  </a>
+                  <div class="class-item-text">
+                    <span>Saturday 7:30am - 9:00am</span>
+                    <h2><a href="{% url 'course' %}">Fitness Class Name #5</a></h2>
+                    <span>By Justin Daniel</span>,
+                    <span>30 minutes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> {% endcomment %}
+        
+      </div>
+    </div>
+    <div class="bgimg" style="background-image: url('{% static "images/img_4.jpg" %}');" data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="row align-items-center justify-content-center text-center">
+          <div class="col-md-7">
+            <h2 class="">Huấn luyện viên tận tình</h2>
+            <p class="lead mx-auto desc mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, nisi cum officia alias recusandae neque reprehenderit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-section" id="trainer-section">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-5" data-aos="fade-up">
+          <div class="col-md-8  section-heading">
+            <span class="subheading">Huấn luyện viên</span>
+            <h2 class="heading mb-3">Tất cả huấn luyện viên</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
+              texts.
+              Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3 mb-4 mb-lg-0 col-md-6 text-center" data-aos="fade-up" data-aos-delay="">
+            <div class="person">
+              <img src="{% static "images/person_1.jpg" %}" alt="Image" class="img-fluid">
+              <h3>Justin Daniel</h3>
+              <p class="position">Trainer</p>
+              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
+              texts.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 mb-4 mb-lg-0 col-md-6 text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="person">
+              <img src="{% static "images/person_3.jpg" %}" alt="Image" class="img-fluid">
+              <h3>Matthew Davidson</h3>
+              <p class="position">Trainer</p>
+              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
+                texts.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 mb-4 mb-lg-0 col-md-6 text-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="person">
+              <img src="{% static "images/person_2.jpg" %}" alt="Image" class="img-fluid">
+              <h3>Matthew Davidson</h3>
+              <p class="position">Trainer</p>
+              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
+                texts.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 mb-4 mb-lg-0 col-md-6 text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="person">
+              <img src="{% static "images/person_4.jpg" %}" alt="Image" class="img-fluid">
+              <h3>Matthew Davidson</h3>
+              <p class="position">Trainer</p>
+              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
+                texts.</p>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+    <div class="bgimg" style="background-image: url('{% static "images/bg_2.jpg" %}');"  data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="row align-items-center justify-content-center text-center">
+          <div class="col-md-7">
+            <h2 class="">Kết quả luyện tập</h2>
+            <p class="lead mx-auto desc mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta ut quisquam, distinctio illo, debitis repudiandae.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-section">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-md-8 section-heading">
+            <span class="subheading">Bảo vệ sức khoẻ</span>
+            <h2 class="heading mb-3">Rèn luyện cơ thể</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, mollitia amet nihil!
+            Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+          </div>
+        </div>
+        <!-- Slider -->
+        <div class="owl-carousel nonloop-block-14 block-14" data-aos="fade">
+          <div class="slide">
+            <div class="ftco-feature-1">
+              <span class="icon flaticon-fit"></span>
+              <div class="ftco-feature-1-text">
+                <h2>Thực phẩm</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis quo, cumque fuga.</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="ftco-feature-1">
+              <span class="icon flaticon-gym-1"></span>
+              <div class="ftco-feature-1-text">
+                <h2>Thuốc tăng trận</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto quasi quia iure unde perferendis!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide">
+            <div class="ftco-feature-1">
+              <span class="icon flaticon-gym"></span>
+              <div class="ftco-feature-1-text">
+                <h2>Thuốc tăng cơ</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tempora nostrum, perspiciatis modi eaque!</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="ftco-feature-1">
+              <span class="icon flaticon-vegetables"></span>
+              <div class="ftco-feature-1-text">
+                <h2>Thức uống</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, magnam ab eius autem est.</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="ftco-feature-1">
+              <span class="icon flaticon-fruit-juice"></span>
+              <div class="ftco-feature-1-text">
+                <h2>Tăng cơ bắp</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis beatae impedit alias ad unde?</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="ftco-feature-1">
+              <span class="icon flaticon-stationary-bike"></span>
+              <div class="ftco-feature-1-text">
+                <h2>Tăng trọng</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, minima quod optio recusandae nisi.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% comment %} <div class="site-section" id="services-section">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-5" data-aos="fade-up">
+          <div class="col-md-8  section-heading">
+            <span class="subheading">Fitness Services</span>
+            <h2 class="heading mb-3">Services</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
+              texts.
+              </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 mb-4 col-md-6" data-aos="fade-up" data-aos-delay="">
+            <div class="ftco-feature-1">
+              <span class="icon flaticon-fit"></span>
+              <div class="ftco-feature-1-text">
+                <h2>Be Fit</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur tempora delectus aut, mollitia. Veritatis!</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="ftco-feature-1">
+              <span class="icon flaticon-gym-1"></span>
+              <div class="ftco-feature-1-text">
+                <h2>Join Club</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae tenetur numquam sunt sequi similique.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="ftco-feature-1">
+              <span class="icon flaticon-gym"></span>
+              <div class="ftco-feature-1-text">
+                <h2>Gym Fitness</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam fuga, blanditiis. Possimus, error, deserunt.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mb-4 col-md-6" data-aos="fade-up" data-aos-delay="">
+            <div class="ftco-feature-1">
+              <span class="icon flaticon-vegetables"></span>
+              <div class="ftco-feature-1-text">
+                <h2>Eat Vegie</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores ullam tempore aliquam dolores quos.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mb-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="ftco-feature-1">
+              <span class="icon flaticon-fruit-juice"></span>
+              <div class="ftco-feature-1-text">
+                <h2>Fruit Juices</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic aut libero, doloribus. Magni, nihil.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mb-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="ftco-feature-1">
+              <span class="icon flaticon-stationary-bike"></span>
+              <div class="ftco-feature-1-text">
+                <h2>Body Warmup</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat dolorem debitis assumenda beatae quis.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div> {% endcomment %}
+{% endblock main-content %}

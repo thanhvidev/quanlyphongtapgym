@@ -1,0 +1,167 @@
+{% extends 'base.html' %} {% load static %}
+{% include 'django.contrib.messages.tags.messages' %} {% block profile %}
+<div class="row bg-warning" style="height: 74px">
+</div>
+<div class="row my-2 ">
+    <div class="col-lg-8 order-lg-2">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Thông Tin Chung</a>
+            </li>
+            <li class="nav-item">
+                <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Thông báo</a>
+            </li>
+            <li class="nav-item">
+                <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Sửa Thông Tin</a>
+            </li>
+            <li class="nav-item">
+                <a href="" data-target="#editpw" data-toggle="tab" class="nav-link">Thay đổi mật khẩu</a>
+            </li>
+        </ul>
+        <div class="tab-content py-4">
+            <div class="tab-pane active" id="profile">
+                <h5 class="mb-3">Thông Tin Cá Nhân</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Họ: {{user.first_name}}</h4>
+                        <h4>Tên: {{user.last_name}} </h4>
+                        <h4>Email: {{user.email}} </h4>
+                        <h4>SĐT: {{user.phonenumber}} </h4>
+                        <h4>Tuổi: {{user.age}} </h4>
+                        <h4>Giới Tính: {{user.get_gender_display}} </h4>
+                    </div>
+                </div>
+                <!--/row-->
+            </div>
+             <div class="tab-pane" id="messages">
+                <div class="alert alert-info alert-dismissable">
+                    <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                </div>
+                <table class="table table-hover table-striped">
+                    <tbody>                                    
+                        <tr>
+                            <td>
+                                <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="float-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus. 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus. 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros. 
+                            </td>
+                        </tr>
+                    </tbody> 
+                </table>
+            </div> 
+            <div class="tab-pane" id="edit">
+                <form role="form">
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label" for="first_name">Họ</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" required id="first_name"  name="first_name" placeholder="{{user.first_name}}" >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label" for="last_name">Tên</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" required id="last_name" name="last_name" placeholder="{{user.last_name}}" >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label" for="id_email">Email</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="email" utofocus required id="id_email" class="form-control" placeholder="{{user.email}}" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label" for="phonenumber">Số điện thoại</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" id="phonenumber" name="phonenumber" placeholder="{{user.phonenumber}}" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Giới Tính</label>
+                        <div class="col-lg-9">
+                            <select class="form-control" required id="gender" name="gender" placeholder="{{user.get_gender_display}}" >
+                                <option value="" disabled selected>-----------</option>
+                                <option value="nam">Nam</option>
+                                <option value="nu">Nữ</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Tuổi</label>
+                        <div class="col-lg-9">
+                            <input type="number" class="form-control" required id="age" name="age" placeholder="{{user.age}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label"></label>
+                        <div class="col-lg-9">
+                            <input type="button" class="btn btn-primary" value="Lưu">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane" id="editpw">
+                <form role="form">
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Mật Khẩu Cũ</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="password" value="11111122333">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Mật Khẩu Mới</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="password" value="11111122333">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Nhập Lại Mật Khẩu mới</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="password" value="11111122333">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label"></label>
+                        <div class="col-lg-9">
+                            <input type="button" class="btn btn-primary" value="Lưu">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 order-lg-1 text-center">
+        {% if user.avatar %}
+            <img src="{{ user.avatar.url }}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+        {% else %}
+            <img src="{% static 'images/default_avatar.jpg' %}" class="mx-auto img-fluid img-circle d-block" alt="Avatar mặc định">
+        {% endif %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="custom-file">
+                {{ form.avatar }}
+                <label class="custom-file-label" for="avatar">Chọn ảnh đại diện</label>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Lưu</button>
+        </form>
+    </div>
+</div>
+{% endblock profile %}
+```

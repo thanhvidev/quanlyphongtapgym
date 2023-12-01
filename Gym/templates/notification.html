@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% load static %}{% load bootstrap4 %}
+{% block notification %}
+<div>    <div class="row bg-warning" style="height: 74px"></div>
+<div class="container mt-3">
+    <h2>Thông Báo</h2>
+    <ul id="notification-list">
+        {% for i in notifications %}
+        <li class="dropdown-item">{{i.content}}</li>
+        <hr class="dropdown-divider">
+        {% endfor %}
+    </ul>
+</div>
+
+
+<script>
+    const socket = new WebSocket('ws://' + window.location.host + '/ws/notification/');
+    socket.onopen = function(event) {
+        console.log('Kết nối WebSocket đã mở:', event);
+    };
+
+    // Khi nhận được thông điệp từ server
+    socket.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        console.log('Tin nhắn gửi từ server:', data);
+
+        // Hiển thị thông báo trong danh sách
+        const notificationList = document.getElementById('notification-list');
+        const listItem = document.createElement('li');
+        listItem.textContent = data;
+        notificationList.appendChild(listItem);
+    };
+
+    // Khi có lỗi trong kết nối WebSocket
+    socket.onerror = function(event) {
+        console.error('WebSocket error:', event);
+    };
+
+    // Khi kết nối WebSocket đóng
+    socket.onclose = function(event) {
+        console.log('WebSocket connection closed:', event);
+    };
+</script>
+</div>
+{% endblock notification %} 
